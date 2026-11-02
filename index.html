@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Quiz App | Test your JavaScript knowledge</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- FULLSCREEN CONFETTI CANVAS -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- STICKY NAVBAR -->
+  <header class="navbar">
+    <div class="wrap nav-inner">
+      <a href="#" id="nav-home" class="brand" aria-label="JS Quiz App Home">
+        <span class="brand-icon">JS</span>
+        <span class="brand-name">Quiz App</span>
+      </a>
+      <nav>
+        <a href="index.html" id="nav-home-link" class="nav-link">Home</a>
+        <a href="about.html" id="nav-about-link" class="nav-link">About Us</a>
+        <button type="button" id="nav-exit-btn" class="nav-link exit-nav-btn" style="display: none;"
+          title="Exit to Home screen">Exit Quiz</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN APP SCREENS -->
+  <main id="app-main">
+
+    <!-- SCREEN 1: HOME -->
+    <section id="home-screen" class="screen active" aria-labelledby="home-title">
+      <div class="hero">
+        <div class="hero-bg-shapes" aria-hidden="true">
+          <div class="shape shape-1"></div>
+          <div class="shape shape-2"></div>
+          <div class="shape shape-3"></div>
+        </div>
+        <div class="wrap hero-grid">
+          <div class="hero-text">
+            <h1 id="home-title">Welcome to the Quiz App</h1>
+            <p class="lead">Ready to test your JavaScript knowledge? Answer 5 quick questions and see how well you know
+              arrays, functions, events and more.</p>
+            <div class="chips">
+              <span class="chip"><span class="chip-dot"></span>5 Questions</span>
+              <span class="chip"><span class="chip-dot"></span>15 Seconds Each</span>
+              <span class="chip"><span class="chip-dot"></span>Instant Feedback</span>
+            </div>
+            <div class="hero-actions">
+              <button id="start-btn" class="btn primary big">Start Quiz</button>
+            </div>
+          </div>
+          <div class="hero-art" aria-hidden="true">
+            <div class="code-window">
+              <div class="code-bar">
+                <i class="dot red"></i>
+                <i class="dot yellow"></i>
+                <i class="dot green"></i>
+                <span class="code-title">quiz.js</span>
+              </div>
+              <pre><code><span class="k">const</span> quiz = {
+  questions: <span class="n">5</span>,
+  time: <span class="n">15</span>,
+  topic: <span class="s">"JavaScript"</span>
+};
+
+<span class="k">function</span> <span class="f">start</span>() {
+  <span class="c">// good luck! 🚀</span>
+  <span class="k">return</span> quiz.questions;
+}</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap how">
+        <div class="section-header">
+          <h2>How it works</h2>
+          <p class="section-desc">Test your JavaScript speed and knowledge in three simple steps.</p>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <span class="step-num">1</span>
+            <h3>Start the quiz</h3>
+            <p>Press Start and get 5 random questions picked from our pool of 20.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">2</span>
+            <h3>Beat the timer</h3>
+            <p>You have 15 seconds per question. Green means right, red means wrong.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">3</span>
+            <h3>See your result</h3>
+            <p>Score 3 or more to pass, then review every answer with a simple explanation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: QUIZ -->
+    <section id="quiz-screen" class="screen" aria-labelledby="question-text">
+      <!-- Full-width light timer strip -->
+      <div class="timer-band">
+        <div class="wrap timer-wrap">
+          <span class="timer-label">Time left</span>
+          <div class="timer-track" role="progressbar" aria-label="Question timer" aria-valuenow="15" aria-valuemin="0"
+            aria-valuemax="15">
+            <div id="timer-bar" class="timer-bar"></div>
+          </div>
+          <span id="timer-text" class="timer-text">15s</span>
+        </div>
+      </div>
+
+      <div class="wrap quiz-body">
+        <div class="quiz-header">
+          <span id="question-counter" class="badge-counter">Question 1 of 5</span>
+          <span id="live-score" class="badge-score">Score: 0</span>
+        </div>
+
+        <div class="progress-track" role="progressbar" aria-label="Quiz progress" aria-valuenow="0" aria-valuemin="0"
+          aria-valuemax="5">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
+
+        <div id="question-area" class="question-area" aria-live="polite">
+          <h2 id="question-text"></h2>
+          <div id="options" class="options"></div>
+          <div class="quiz-controls-row">
+            <div class="feedback-container">
+              <p id="feedback" class="feedback" aria-live="assertive"></p>
+            </div>
+            <button id="skip-btn" class="btn btn-skip" type="button" title="Skip this question">Skip Question
+              &rarr;</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: RESULT -->
+    <section id="result-screen" class="screen" aria-labelledby="result-title">
+      <!-- Full-width result banner -->
+      <div class="result-hero">
+        <div class="wrap result-grid">
+          <div class="score-circle-wrapper">
+            <div class="score-circle" aria-label="Final score">
+              <span id="score-value">0</span>
+              <span class="score-denom">/ 5</span>
+            </div>
+          </div>
+          <div class="result-text">
+            <h2 id="result-title"></h2>
+            <p id="result-subtitle" class="lead"></p>
+            <div id="best-score-wrapper" class="best-score-wrapper">
+              <p id="best-score" class="best-score"></p>
+            </div>
+            <div class="result-buttons">
+              <button id="retry-btn" class="btn primary">Try Again</button>
+              <button id="home-btn" class="btn secondary">Back to Home</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review section on white background -->
+      <div class="wrap review">
+        <div class="review-header">
+          <h3>Review your answers</h3>
+          <p class="review-desc">Check your answers against the correct solutions with simple explanations.</p>
+        </div>
+        <div id="review-list" class="review-list"></div>
+      </div>
+    </section>
+
+    <!-- SCREEN 4: ABOUT US -->
+    <section id="about-screen" class="screen" aria-labelledby="about-title">
+      <div class="hero about-hero">
+        <div class="wrap">
+          <div class="hero-text">
+            <h1 id="about-title">About Group 9</h1>
+            <p class="lead">Web Development Project · Build a Quiz That Challenges the Class with JavaScript</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap about-content">
+        <div class="section-header">
+          <h2>Meet the team</h2>
+        </div>
+
+        <!-- add <span class="member-badge">Role</span> inside .member-info if roles are needed -->
+        <div class="team-grid">
+          <div class="member-card">
+            <div class="member-avatar">A</div>
+            <div class="member-info">
+              <h3 class="member-name">Ayesha Fatima</h3>
+              <p class="member-reg">2024-ag-5501</p>
+            </div>
+          </div>
+
+          <div class="member-card">
+            <div class="member-avatar">M</div>
+            <div class="member-info">
+              <h3 class="member-name">Malaika Bashir</h3>
+              <p class="member-reg">2024-ag-4316</p>
+            </div>
+          </div>
+
+          <div class="member-card">
+            <div class="member-avatar">M</div>
+            <div class="member-info">
+              <h3 class="member-name">Minahal Murtaza</h3>
+              <p class="member-reg">2024-ag-4893</p>
+            </div>
+          </div>
+
+          <div class="member-card">
+            <div class="member-avatar">A</div>
+            <div class="member-info">
+              <h3 class="member-name">Ahmed Raza</h3>
+              <p class="member-reg">2024-ag-6489</p>
+            </div>
+          </div>
+
+          <div class="member-card">
+            <div class="member-avatar">R</div>
+            <div class="member-info">
+              <h3 class="member-name">Rashid Ali</h3>
+              <p class="member-reg">2024-ag-7095</p>
+            </div>
+          </div>
+
+          <div class="member-card">
+            <div class="member-avatar">I</div>
+            <div class="member-info">
+              <h3 class="member-name">Imama Khalid</h3>
+              <p class="member-reg">2024-ag-7557</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-overview-card">
+          <div class="overview-header">
+            <h3>About the project</h3>
+          </div>
+          <div class="overview-grid">
+            <div class="overview-item">
+              <div class="overview-icon">📦</div>
+              <div class="overview-text">
+                <strong>Arrays &amp; Objects</strong>
+                <p>20 questions stored as an array of objects.</p>
+              </div>
+            </div>
+
+            <div class="overview-item">
+              <div class="overview-icon">⚙️</div>
+              <div class="overview-text">
+                <strong>Functions</strong>
+                <p>Small, single-purpose functions run each part of the quiz.</p>
+              </div>
+            </div>
+
+            <div class="overview-item">
+              <div class="overview-icon">🎯</div>
+              <div class="overview-text">
+                <strong>Events</strong>
+                <p>Clicks and keyboard keys (1-4, S, Esc) control the quiz.</p>
+              </div>
+            </div>
+
+            <div class="overview-item">
+              <div class="overview-icon">⏱️</div>
+              <div class="overview-text">
+                <strong>Timers</strong>
+                <p>A 15-second countdown bar changes from green to orange to red.</p>
+              </div>
+            </div>
+
+            <div class="overview-item">
+              <div class="overview-icon">🏆</div>
+              <div class="overview-text">
+                <strong>Score Calculation</strong>
+                <p>Correct answers add one point; 3 out of 5 is a pass.</p>
+              </div>
+            </div>
+
+            <div class="overview-item">
+              <div class="overview-icon">💡</div>
+              <div class="overview-text">
+                <strong>Answer Feedback</strong>
+                <p>Instant colours plus a review with a simple explanation for every question.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-actions">
+          <button id="about-start-btn" class="btn primary">Start Quiz</button>
+          <button id="about-home-btn" class="btn secondary">Back to Home</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap footer-content">
+      <p>Built by Group 9 with HTML, CSS and JavaScript</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

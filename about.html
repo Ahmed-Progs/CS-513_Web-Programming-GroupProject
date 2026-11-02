@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | JS Quiz App - Group 9</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- STICKY NAVBAR -->
+  <header class="navbar">
+    <div class="wrap nav-inner">
+      <a href="index.html" class="brand" aria-label="JS Quiz App Home">
+        <span class="brand-icon">JS</span>
+        <span class="brand-name">Quiz App</span>
+      </a>
+      <nav>
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link active">About Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN APP CONTENT -->
+  <main id="app-main">
+
+    <!-- SCREEN 4: ABOUT US -->
+    <section id="about-screen" class="screen active" aria-labelledby="about-title">
+      <div class="hero about-hero">
+        <div class="wrap">
+          <div class="hero-text">
+            <h1 id="about-title">About Group 9</h1>
+            <p class="lead">Web Development Project · Build a Quiz That Challenges the Class with JavaScript</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap about-content">
+        <div class="section-header">
+          <h2>Meet the team</h2>
+        </div>
+
+        <!-- add <span class="member-badge">Role</span> inside .member-info if roles are needed -->
+        <div class="team-grid">
+          <div class="member-card">
+            <div class="member-avatar">A</div>
+            <div class="member-info">
+              <h3 class="member-name">Ayesha Fatima</h3>
+              <p class="member-reg">2024-ag-5501</p>
+            </div>
+          </div>
+
+          <div class="member-card">
+            <div class="member-avatar">M</div>
+            <div class="member-info">
+              <h3 class="member-name">Malaika Bashir</h3>
+              <p class="member-reg">2024-ag-4316</p>
+            </div>
+          </div>
+
+          <div class="member-card">
+            <div class="member-avatar">M</div>
+            <div class="member-info">
+              <h3 class="member-name">Minahal Murtaza</h3>
+              <p class="member-reg">2024-ag-4893</p>
+            </div>
+          </div>
+
+          <div class="member-card">
+            <div class="member-avatar">A</div>
+            <div class="member-info">
+              <h3 class="member-name">Ahmed Raza</h3>
+              <p class="member-reg">2024-ag-6489</p>
+            </div>
+          </div>
+
+          <div class="member-card">
+            <div class="member-avatar">R</div>
+            <div class="member-info">
+              <h3 class="member-name">Rashid Ali</h3>
+              <p class="member-reg">2024-ag-7095</p>
+            </div>
+          </div>
+
+          <div class="member-card">
+            <div class="member-avatar">I</div>
+            <div class="member-info">
+              <h3 class="member-name">Imama Khalid</h3>
+              <p class="member-reg">2024-ag-7557</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-overview-card">
+          <div class="overview-header">
+            <h3>About the project</h3>
+          </div>
+          <div class="overview-grid">
+            <div class="overview-item">
+              <div class="overview-icon">📦</div>
+              <div class="overview-text">
+                <strong>Arrays &amp; Objects</strong>
+                <p>20 questions stored as an array of objects.</p>
+              </div>
+            </div>
+
+            <div class="overview-item">
+              <div class="overview-icon">⚙️</div>
+              <div class="overview-text">
+                <strong>Functions</strong>
+                <p>Small, single-purpose functions run each part of the quiz.</p>
+              </div>
+            </div>
+
+            <div class="overview-item">
+              <div class="overview-icon">🎯</div>
+              <div class="overview-text">
+                <strong>Events</strong>
+                <p>Clicks and keyboard keys (1-4, S, Esc) control the quiz.</p>
+              </div>
+            </div>
+
+            <div class="overview-item">
+              <div class="overview-icon">⏱️</div>
+              <div class="overview-text">
+                <strong>Timers</strong>
+                <p>A 15-second countdown bar changes from green to orange to red.</p>
+              </div>
+            </div>
+
+            <div class="overview-item">
+              <div class="overview-icon">🏆</div>
+              <div class="overview-text">
+                <strong>Score Calculation</strong>
+                <p>Correct answers add one point; 3 out of 5 is a pass.</p>
+              </div>
+            </div>
+
+            <div class="overview-item">
+              <div class="overview-icon">💡</div>
+              <div class="overview-text">
+                <strong>Answer Feedback</strong>
+                <p>Instant colours plus a review with a simple explanation for every question.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-actions">
+          <a href="index.html?start=quiz" id="about-start-btn" class="btn primary">Start Quiz</a>
+          <a href="index.html" id="about-home-btn" class="btn secondary">Back to Home</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap footer-content">
+      <p>Built by Group 9 with HTML, CSS and JavaScript</p>
+    </div>
+  </footer>
+</body>
+
+</html>
+
